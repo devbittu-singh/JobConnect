@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employer Dashboard - JobConnect</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <h1>JobConnect</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#" class="active">Dashboard</a></li>
+                    <li><a href="#">Post Job</a></li>
+                    <li><a href="#">Candidates</a></li>
+                    <li><a href="#">Messages</a></li>
+                    <li><a href="#" onclick="logout()" class="btn btn-outline">Logout</a></li>
+                </ul>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="dashboard">
+        <div class="container">
+            <div class="welcome-banner">
+                <h2>Welcome, <span id="companyName"></span></h2>
+                <p>Find the best talent for your business</p>
+                <a href="#" class="btn btn-primary">Post a Job</a>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="stats-card">
+                    <h3>Jobs Posted</h3>
+                    <p id="jobsPosted">0</p>
+                </div>
+                <div class="stats-card">
+                    <h3>Active Jobs</h3>
+                    <p id="activeJobs">0</p>
+                </div>
+                <div class="stats-card">
+                    <h3>Workers Hired</h3>
+                    <p id="workersHired">0</p>
+                </div>
+                <div class="stats-card">
+                    <h3>Company Rating</h3>
+                    <p><i class="fas fa-star"></i> <span id="companyRating">0.0</span>/5.0</p>
+                </div>
+            </div>
+
+            <div class="recent-applicants">
+                <h3>Recent Applicants</h3>
+                <div class="applicants-list">
+                    <div class="applicant-card">
+                        <div class="applicant-info">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Applicant">
+                            <div>
+                                <h4>John Smith</h4>
+                                <p class="skills">Web Developer, UI/UX Designer</p>
+                                <p class="rating"><i class="fas fa-star"></i> 4.8</p>
+                            </div>
+                        </div>
+                        <a href="#" class="btn btn-primary">View Profile</a>
+                    </div>
+                    <div class="applicant-card">
+                        <div class="applicant-info">
+                            <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Applicant">
+                            <div>
+                                <h4>Sarah Johnson</h4>
+                                <p class="skills">Graphic Designer, Illustrator</p>
+                                <p class="rating"><i class="fas fa-star"></i> 4.9</p>
+                            </div>
+                        </div>
+                        <a href="#" class="btn btn-primary">View Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 JobConnect. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Display user info on dashboard
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (currentUser) {
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users.find(u => u.id === currentUser.id);
+            if (user) {
+                document.getElementById('companyName').textContent = user.company || user.name;
+            }
+        } else {
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>
